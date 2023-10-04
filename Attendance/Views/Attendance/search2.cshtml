@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "SEARCH AND REPORT";
+}
+<h2>البحث باستخدام القطاعات</h2>
+
+<h2>SEARCH DB</h2>
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "قطاع الشئون الإدارية",
+        Value = "قطاع الشئون الإدارية"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "القطاع المالى",
+        Value = "القطاع المالى",
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "مكتب العضوالمنتدب التنفيذى",
+        Value = "مكتب العضوالمنتدب التنفيذى",
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "قطاع العمليات",
+        Value = "قطاع العمليات"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "الإدارة العامة للأمن",
+        Value = "الإدارة العامة للأمن"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "الإدارةالعامة للشئون القانونية",
+        Value = "الإدارةالعامة للشئون القانونية"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "قطاع تكنولوجيا المعلومات",
+        Value = "قطاع تكنولوجيا المعلومات"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "الإدارةالعامة للمراجعةوالحوكمة",
+        Value = "الإدارةالعامة للمراجعةوالحوكمة"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "مكلفين من ايجوث",
+        Value = "مكلفين من ايجوث"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "مؤقت",
+        Value = "مؤقت"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "مكافئة شاملة",
+        Value = "مكافئة شاملة"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "الجراج",
+        Value = "الجراج"
+    });
+}
+@using (Html.BeginForm("search1", "Attendance"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        اختار التاريخ     @Html.TextBox("employeecode1", "", new { @autocomplete = "off" })
+    </div>
+
+    <div>
+     القطاعات التى تم اختيارها   @Html.DropDownList("depname", new SelectList(listItems, "Value", "Text"))
+    </div>
+    <div>
+    اختار القطاعات  @Html.TextBox("employeecode12", "", new { @autocomplete = "off" ,@val="الشئون الماليه"})
+    </div>
+
+
+
+
+
+
+        <input type="submit" value="search" />
+   
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#employeecode1').change(function () {
+            sessionStorage.setItem("employeecode1",document.getElementById("employeecode1").value);
+        });
+        document.getElementById("employeecode1").value = sessionStorage.getItem("employeecode1");
+        $("#employeecode1").datepicker({
+
+            dateFormat: "Mdyy"
+        });
+    });
+
+
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#depname').change(function () {
+            sessionStorage.setItem("employeecode12", document.getElementById("depname").value);
+
+
+
+
+
+        });
+        document.getElementById("employeecode12").value = sessionStorage.getItem("employeecode12");
+
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        console.log("ready!");
+
+   //     $('#depname').change(function () {
+     //       sessionStorage.setItem("employeecode1",toString(document.getElementById("employeecode1").value))
+        //});
+       // document.getElementById("employeecode1").value = sessionStorage.getItem("employeecode1")
+   // $("#employeecode12").val("الأصول والأستثمار");
+ //   window.onload = function () {
+        $('#depname').hover(function () {
+            var depname = $('#depname').val();
+            $("#employeecode12").val(depname);
+        });
+        //function storedata() {
+        //    if (typeof (Storage) !== "undefined") {
+        //        var employeecode1 = document.getElementById("employeecode1").value;
+        //        var depname = document.getElementById("depname").value;
+        //        var employeecode12 = document.getElementById("employeecode12").value;
+        //        sessionStorage.depname = depname;
+        //        sessionStorage.employeecode12 = employeecode12;
+        //        sessionStorage.employeecode1 = employeecode1;
+
+
+        //        console.log("Your datas restored");
+        //    } else {
+        //        console.log("Sorry, your browser does not support web storage...");
+        //    }
+        //}
+        //storedata();
+        //if (sessionStorage.employeecode1 && sessionStorage.depname && sessionStorage.employeecode12) {
+        //    document.getElementById("employeecode1").value = sessionStorage.employeecode1;
+        //    document.getElementById("depname").value = sessionStorage.depname;
+        //    document.getElementById("employeecode12").value = sessionStorage.employeecode12;
+        //}
+    });
+
+
+
+</script>

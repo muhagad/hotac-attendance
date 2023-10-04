@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "SEARCH AND REPORT";
+}
+<h1>البحث باستخدام اسم الماكينه</h1>
+<h2>SEARCH DB</h2>
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text =  "موظفين الدور 2",
+        Value = "موظفين الدور  2"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text =  "موظفين الدور 8",
+        Value = "موظفين الدور 8",
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text =  "موظفين الدور 11",
+        Value = "موظفين الدور 11"
+    });
+
+    listItems.Add(new SelectListItem
+    {
+        Text =  "قيادات الدور 2 ",
+        Value = "قيادات الدور 2"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text =  "قيادات الدور 8",
+        Value = "8 قيادات الدور"
+    });
+
+    listItems.Add(new SelectListItem
+    {
+        Text =  "11 قيادات الدور",
+        Value = "قيادات الدور 11"
+    });
+
+
+
+}
+@using (Html.BeginForm("search33", "Attendance"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+      اختار التاريخ  @Html.TextBox("employeecode3", "", new { @autocomplete = "off" })
+        </div>
+
+    <div>
+        اختار اسم الماكينه  @Html.DropDownList("depname", new SelectList(listItems, "Value", "Text"))
+    </div>
+    <div>
+        اسم الماكينه      @Html.TextBox("employeecode32", "", new { @autocomplete = "off" })
+    </div>
+
+
+
+
+
+
+        <input type="submit" value="search" />
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $("#employeecode12").val("الأصول والأستثمار");
+
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#employeecode3").datepicker({
+
+            dateFormat: "Mdyy"
+        });
+    });
+</script>
+<script>
+    $('#depname').change(function () {
+        var depname = $('#depname').val();
+        $("#employeecode32").val(depname);
+    });
+
+</script>
+<script>
+</script>
